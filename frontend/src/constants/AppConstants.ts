@@ -1,0 +1,9 @@
+export const TOKEN = 'token';
+export const API_URL = 'http://localhost:8080/api/v1'
+export const USER_PREFIX_PATH = '/user';
+export const ADMIN_PREFIX_PATH = '/admin';
+export const LOGIN_ROUTE = '/login';
+export const REGISTER_ROUTE = '/register';
+export const AUTHENTICATED_ADMIN_ENTRY = `${ADMIN_PREFIX_PATH}`;
+export const AUTHENTICATED_USER_ENTRY = `${USER_PREFIX_PATH}`;
+export const UNAUTHENTICATED_ENTRY = LOGIN_ROUTE;
