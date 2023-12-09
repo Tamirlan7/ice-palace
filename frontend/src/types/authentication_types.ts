@@ -1,22 +1,14 @@
+export interface ICsrfResponse {
+    headerName: string,
+    token: string
+}
+
 export interface IRegisterRequest {
-    email: string,
-    password: string,
-    confirmPassword: string
+    phone: number
+    password: string
 }
 
 export interface ILoginRequest {
-    email: string,
-    password: string,
-}
-
-export interface IToken {
-    accessToken: string,
-    refreshToken: string,
-}
-
-export interface IJwtClaims {
-    iat: number,
-    exp: number
-    role: string,
-    userId: number,
+    phone: number
+    password: string
 }

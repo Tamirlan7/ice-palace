@@ -1,6 +1,8 @@
 package com.backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,7 +26,8 @@ public class User implements UserDetails {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Size(max = 11, message = "phone length has exceeded its limit which is 11")
+    @Column(nullable = false, unique = true, length = 11)
     private String phone;
 
     @Column(nullable = false)

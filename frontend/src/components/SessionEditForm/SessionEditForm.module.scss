@@ -1,0 +1,59 @@
+.btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+    gap: 20px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn {
+    box-sizing: content-box;
+    padding-inline: 15px;
+    min-height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    border: none;
+    background-color: rgb(44, 145, 154);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all .2s cubic-bezier(0.645, 0.045, 0.355, 1);
+    font-family: inherit;
+    font-weight: 600;
+    color: #fff;
+
+    &:disabled {
+        cursor: not-allowed;
+        border-color: #d9d9d9;
+        color: rgba(0, 0, 0, 0.25);
+        background-color: rgba(0, 0, 0, 0.04);
+        box-shadow: none;
+    }
+
+    &:not([disabled]):hover {
+        box-shadow: 0px 2px 4px 0px rgb(18, 60, 64);
+    }
+
+    &:not([disabled]):active {
+        background-color: rgb(21, 77, 82);
+    }
+}
+
+.delete {
+    background-color: rgb(154, 44, 44);
+    
+    &:not([disabled]):hover {
+        box-shadow: 0px 2px 4px 0px rgb(49, 10, 10);
+    }
+
+    &:not([disabled]):active {
+        background-color: rgb(75, 20, 20);
+    }
+}

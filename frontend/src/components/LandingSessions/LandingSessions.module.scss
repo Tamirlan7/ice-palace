@@ -1,0 +1,49 @@
+.block {
+    padding-top: 6rem;
+    padding-bottom: 3rem;   
+}
+
+.title {
+    color: #C1A300;
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 2.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.type {
+    color: #000;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+.arrow {
+    display: flex;
+    justify-content: center;
+
+    svg {
+        transform: rotate(-90deg);
+    }
+}
+
+.no {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.sessions {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+    gap: 8rem;
+    list-style: none;
+    flex-wrap: wrap;
+}
+
+.second-type {
+    margin-top: 6rem;
+}

@@ -19,3 +19,7 @@ spring:
 logging:
   level:
     org.springframework.security: trace
+server:
+  reactive:
+    session:
+      timeout: 360m

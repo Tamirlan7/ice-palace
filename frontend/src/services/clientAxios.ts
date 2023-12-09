@@ -1,42 +1,16 @@
 import axios from "axios";
-import { API_URL, TOKEN } from "../constants/AppConstants";
-import { IToken } from "types/authentication_types";
+import { API_URL } from "../constants/AppConstants";
 
-const storageToken = localStorage.getItem(TOKEN);
-let token: IToken| undefined;
-
-if (storageToken) {
-    token = JSON.parse(storageToken);
-}
+const csrfToken: string = document.cookie.replace(/(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/, '$1');
 
 const clientAxios = axios.create({
     baseURL: API_URL,
     headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token?.accessToken}`
-    }
+        'X-XSRF-TOKEN': csrfToken
+    },
+    withCredentials: true,
 });
 
-clientAxios.interceptors.request.use(
-    (req) => {
-        return req;
-    },
-    (err) => {
-        Promise.reject(err);
-    }
-)
-
-clientAxios.interceptors.response.use(
-    (res) => {
-        if (res.status === 401) {
-            
-        }
-
-        return res;
-    },
-    (err) => {
-        Promise.reject(err);
-    }
-)
 export default clientAxios;

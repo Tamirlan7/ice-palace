@@ -1,0 +1,27 @@
+.block {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 70px);
+}
+
+.form {
+    border-radius: 8px;
+    border: 1px solid #000;
+    padding: 15px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-grow: 1;
+    max-width: 250px;
+}
+
+.input {
+    width: 100%;
+}  
+
+.btn {
+    width: calc(100% - 30px);
+}

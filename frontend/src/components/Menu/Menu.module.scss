@@ -1,0 +1,17 @@
+.list {
+    list-style: none;
+    display: flex;
+    gap: 2.6rem;
+    align-items: center;
+}
+
+.item {
+    color: #fff;
+    transition: color .2s ease;
+    font-family: 'Nunito Sans', 'Times New Roman', Times, serif;
+    font-weight: 400;
+
+    :hover {
+        color: #C1A300;
+    }
+}

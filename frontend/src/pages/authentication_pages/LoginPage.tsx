@@ -1,36 +1,72 @@
-import { FC, useState, ChangeEvent, FormEvent } from 'react';
+import { FC, useState, ChangeEvent, FormEvent, useEffect, useCallback } from 'react';
 import c from './LoginPage.module.scss'
 import { loginThunk } from 'slices/authSlice';
-import { ILoginRequest } from 'types/authentication_types';
-import { useAppDispatch } from 'hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
+import Input from 'UI/Input/Input';
+import Button from 'UI/Button/Button';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { getUserThunk } from 'slices/userSlice';
+import { UrlPaths } from 'constants/AppConstants';
+import Loader from 'UI/Loader/Loader';
+import RequestLoader from 'UI/RequestLoader/RequestLoader';
 
 
 const LoginPage: FC  = () => {
     const dispatch = useAppDispatch();
-    const [formData, setFormData] = useState<ILoginRequest>({
-        email: '',
-        password: '',
-    })
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { role, loading: userLoading } = useAppSelector(state => state.user)
+    const { loading: authLoading } = useAppSelector(state => state.auth)
+    const [password, setPassword] = useState<string>('');
+    const [phone, setPhone] = useState<number>();
 
-    const onChange = (e: ChangeEvent<HTMLInputElement>) => 
-        setFormData((prev) => ({...prev, [e.target.name]: e.target.value}))
+    const onPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setPassword(e.target.value);
+    }
+
+    const onPhoneChange = (phone: number) => {
+        setPhone(phone);
+    }
 
     const singIn = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(loginThunk(formData))
+
+        if (phone && password) {
+            dispatch(loginThunk({
+                phone,
+                password,
+            }))
+        }
     }
 
+    useEffect(() => {
+        dispatch(getUserThunk())
+
+        if (role !== null) {
+            if (location.state.from) {
+                navigate(location.state.from);
+                return;
+            }
+
+            navigate(UrlPaths.HOME);
+        }
+    }, [role, navigate, location, dispatch])
+
+
     return (
-        <div className={c.page}>
-            <form className={c.form} onSubmit={singIn}>
+        <>
+            {(authLoading || userLoading) && (<RequestLoader />)}
+            <div className={c.block}>
+                <form className={c.form} onSubmit={singIn}>
+                    <h1>Войти</h1>
+                    <Input mode='phone' onPhoneChange={onPhoneChange} className={c.input} type="text" placeholder='Номер' name='phone' />
+                    <Input className={c.input} type="password" placeholder='Пароль' onChange={onPasswordChange} value={password} name='password' />
 
-                <input type="text" placeholder='email' onChange={onChange} value={formData.email} name='email' />
-                <input type="password" placeholder='password' onChange={onChange} value={formData.password} name='password' />
+                    <Button type='submit' className={c.btn}>Войти</Button>
 
-                <button type='submit' className={c.btn}>Sign In</button>
-
-            </form>
-        </div>
+                </form>
+            </div>
+        </>
     )
 }
 

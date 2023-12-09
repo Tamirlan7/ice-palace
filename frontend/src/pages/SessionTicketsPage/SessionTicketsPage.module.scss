@@ -1,0 +1,14 @@
+.block {
+    display: flex;
+    flex-direction: column;
+    padding: 3rem;
+}
+
+.session {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 2rem;
+}
